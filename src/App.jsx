@@ -1,9 +1,14 @@
-import { Login } from "./components/Login"
+import { Header } from "./components/Header"
+import { ListaPacientes } from "./components/ListaPacientes"
+import { Navbar } from "./components/Navbar"
 function App() {
   return (
     <div>
-      <h1>Hola React Vite</h1>
-      <Login user="Allam" />
+      <Navbar />
+      <div className="container">
+        <Header />
+        <ListaPacientes />
+      </div>
     </div>
   )
 }
