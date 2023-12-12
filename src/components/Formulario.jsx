@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react"
+import { Error, Success } from "./Alert"
 
 function Formulario() {
+    let content
 
     const [nombre, setNombre] = useState('')
     const [correo, setCorreo] = useState('')
     const [telefono, setTelefono] = useState('')
     const [sintomas, setSintomas] = useState('')
+    const [error, setError] = useState(false)
 
     const nombreChange = e => setNombre(e.target.value)
     const correoChange = e => setCorreo(e.target.value)
@@ -14,7 +17,12 @@ function Formulario() {
 
     const formulario = (e) => {
         e.preventDefault()
-        console.log('enviado formulario')
+        const form = ([nombre, correo, telefono, sintomas].includes('')) ? setError(true) : setError(false)
+        if (error) {
+            content = <Error message="Existen algun campo vacio" />
+        } else {
+            content = <Success message="Enviado exitoso" />
+        }
     }
 
     return (
@@ -26,6 +34,8 @@ function Formulario() {
                 </div>
                 <div className="card-body">
                     <form action="" onSubmit={formulario}>
+                        {content}
+                        {console.log(content)}
                         <div className="form-group">
                             <label htmlFor="nombre">Nombre paciente</label>
                             <input type="text" placeholder="Nombre paciente" name="" id="nombre" className="form-control mb-3" value={nombre}
