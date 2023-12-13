@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react"
 import { Alert } from "./Alert"
 
-function Formulario() {
+function Formulario({ pacientes, setPacientes }) {
 
     const [nombre, setNombre] = useState('')
     const [correo, setCorreo] = useState('')
     const [telefono, setTelefono] = useState('')
     const [sintomas, setSintomas] = useState('')
     const [error, setError] = useState(true)
-    const [pacientes, setPacientes] = useState([])
 
     const nombreChange = e => setNombre(e.target.value)
     const correoChange = e => setCorreo(e.target.value)
