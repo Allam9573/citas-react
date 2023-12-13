@@ -1,15 +1,8 @@
-const Error = (props) => {
+const Alert = (props) => {
     return (
-        <div>
-            <div className="alert alert-danger">{props.message}</div>
+        <div className={props.css}>
+            {props.message}
         </div>
     )
 }
-const Success = (props) => {
-    return (
-        <div>
-            <div className="alert alert-success">{props.message}</div>
-        </div>
-    )
-}
-export { Error, Success }
+export { Alert }

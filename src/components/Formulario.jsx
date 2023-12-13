@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react"
-import { Error, Success } from "./Alert"
+import { Alert } from "./Alert"
 
 function Formulario() {
-    let content
 
     const [nombre, setNombre] = useState('')
     const [correo, setCorreo] = useState('')
     const [telefono, setTelefono] = useState('')
     const [sintomas, setSintomas] = useState('')
-    const [error, setError] = useState(false)
+    const [error, setError] = useState(true)
+    const [pacientes, setPacientes] = useState([])
 
     const nombreChange = e => setNombre(e.target.value)
     const correoChange = e => setCorreo(e.target.value)
@@ -17,14 +17,27 @@ function Formulario() {
 
     const formulario = (e) => {
         e.preventDefault()
-        const form = ([nombre, correo, telefono, sintomas].includes('')) ? setError(true) : setError(false)
-        if (error) {
-            content = <Error message="Existen algun campo vacio" />
+        if ([nombre, correo, telefono, sintomas].includes('')) {
+            setError(true)
+            return
         } else {
-            content = <Success message="Enviado exitoso" />
+            setError(false)
         }
-    }
 
+        const paciente = {
+            nombre,
+            correo,
+            telefono,
+            sintomas
+        }
+        setPacientes([...pacientes, paciente])
+        console.log(pacientes)
+        setNombre('')
+        setCorreo('')
+        setTelefono('')
+        setSintomas('')
+
+    }
     return (
         <div>
             <p className="fs-5">Agrega pacientes y <span className="text-primary">administralos</span></p>
@@ -33,15 +46,13 @@ function Formulario() {
                     <h4 className="my-2">Registro de Pacientes</h4>
                 </div>
                 <div className="card-body">
-                    <form action="" onSubmit={formulario}>
-                        {content}
-                        {console.log(content)}
+                    {error ? <Alert css="alert alert-danger" message="Existen campos vacios" /> : <Alert css="alert alert-success" message="Envio de formulario exitoso" />}
+                    <form onSubmit={formulario}>
                         <div className="form-group">
                             <label htmlFor="nombre">Nombre paciente</label>
                             <input type="text" placeholder="Nombre paciente" name="" id="nombre" className="form-control mb-3" value={nombre}
                                 onChange={nombreChange}
                             />
-                            <p>{nombre}</p>
                         </div>
                         <div className="form-group">
                             <label htmlFor="correo">Correo Electronico</label>
