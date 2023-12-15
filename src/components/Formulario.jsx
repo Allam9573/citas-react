@@ -22,12 +22,17 @@ function Formulario({ pacientes, setPacientes }) {
         } else {
             setError(false)
         }
+        const generateId = () => {
+            const id = Date.now().toString(36) + Math.random().toString(36).substr(2)
+            return id
+        }
 
         const paciente = {
             nombre,
             correo,
             telefono,
-            sintomas
+            sintomas,
+            id: generateId()
         }
         setPacientes([...pacientes, paciente])
         console.log(pacientes)

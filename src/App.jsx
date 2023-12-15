@@ -6,6 +6,7 @@ import { Navbar } from "./components/Navbar"
 function App() {
 
   const [pacientes, setPacientes] = useState([])
+  const [paciente, setPaciente] = useState({})
 
   return (
     <div className="vh-100 overflow-y-scroll">
@@ -17,12 +18,12 @@ function App() {
           </div>
           <div className="col-8">
             {
-              pacientes.length === 0 ? <h2>No hay pacientes registrados</h2> : <h2>Lista de Pacientes</h2>
+              pacientes.length === 0 ? <h2 className="text-primary">No hay pacientes registrados</h2> : <h2>Lista de Pacientes</h2>
             }
             {
-              pacientes.map((paciente, index) => {
+              pacientes.map(paciente => {
                 return (
-                  <ListaPacientes key={index} pacientes={paciente} />
+                  <ListaPacientes key={paciente.id} pacientes={paciente} setPaciente={setPaciente} />
                 )
               })
             }
